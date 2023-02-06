@@ -1,6 +1,8 @@
 clear; close all; clc
 addpath('..')
-rmpath(genpath('..\..\_beforeFERR'))
+addpath(genpath('..\..\..\02 MATLAB\basefunctions'))
+addpath(genpath('..\..\toolbox'))
+% rmpath(genpath('..\..\_beforeFERR'))
 % -- Purpose of script
 % Assesses the robustness of a given RR design to various changes in
 % experimental conditions. 
@@ -29,6 +31,7 @@ runRef_all = {'rxztxfn'};
 % Robustness check to be performed
 % check = 'FlowRes';
 check = 'Geometry';
+check = 'SampleDims';
 
 % BOOLEANS
 dontsave = 0;       % If 1, overrides the saving of a MAT file

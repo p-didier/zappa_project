@@ -8,6 +8,7 @@ function status = perf_robust_checks(designData,varargin)
 %   -'Check' [string] - Check to be performed.
 %       -If 'FlowRes': RC across sample flow resistivities (default).
 %       -If 'Geometry': RC across slight geometrical changes.
+%       -If 'SampleDims': RC across different sample dimensions.
 % >>> Outputs:
 % -status [struct] - Outcome of RC check.
 
@@ -28,6 +29,8 @@ switch check
         status = perf_flowres_RC(designData);
     case 'Geometry'
         status = perf_geom_RC(designData);
+    case 'SampleDims'
+        status = perf_sampledims_RC(designData);
 end
 
 end
