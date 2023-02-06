@@ -1,19 +1,20 @@
-/COM,ANSYS RELEASE Release 19.2      BUILD 19.2      UP20180808       23:11:41
+/COM,ANSYS RELEASE Release 19.2      BUILD 19.2      UP20180808       13:01:20
 
- *** WARNING ***                         CP =       0.297   TIME= 23:11:42
- Assembly SAMPLEVOLUME is deleted.                                       
+ *** WARNING ***                         CP =       0.156   TIME= 13:01:20
+ The working directory specified (C:\Users\u0137935\Dropbox\BELGIUM\KU   
+ Leuven\Research\04 Simulations\01 ANSYS\07                              
+ Optimization\02_parametrisation1) is not a directory.  The /CWD         
+ command is ignored.                                                     
 
- *** WARNING ***                         CP =       0.297   TIME= 23:11:42
- Specified range of 0 to 0 is not permitted.  The VSEL command is        
- ignored.                                                                
+ *** WARNING ***                         CP =       0.203   TIME= 13:01:20
+ Parameter file does not exist ( 01_input_files\params.txt ).            
 
- *** WARNING ***                         CP =       0.734   TIME= 23:11:43
- Unknown parameter name= REFINEMESHARSAMPLE.  A value of 7.888609052E-31 
- will be used.                                                           
+ *** WARNING ***                         CP =       0.203   TIME= 13:01:20
+ Unknown parameter name= FMAX.  A value of 7.888609052E-31 will be used. 
 
- *** WARNING ***                         CP =       1.000   TIME= 23:11:43
- CLEAR, SELECT, and MESH boundary condition commands are not possible    
- after MODMSH.                                                           
+ *** WARNING ***                         CP =       0.203   TIME= 13:01:20
+ Unknown parameter name= FMIN.  A value of 7.888609052E-31 will be used. 
 
- *** WARNING ***                         CP =       1.359   TIME= 23:11:43
- No constraints have been defined using the D command.                   
+ *** ERROR ***                           CP =       0.203   TIME= 13:01:20
+ Cannot open user library file= ..\..\05_Macros\RTana_macro.mac.         
+  The *ULI command is ignored.                                           
