@@ -30,6 +30,7 @@ switch check
     case 'Geometry'
         status = perf_geom_RC(designData);
     case 'SampleDims'
+        delete('uncorrel_factor.mat');
         status = perf_sampledims_RC(designData);
 end
 

@@ -1,0 +1,1 @@
+SET KMP_STACKSIZE=4096k & "c:\Program Files\ANSYS Inc\v192\ansys\bin\winx64\ANSYS192.exe" -b -i "C:\Users\u0137935\Dropbox\_BELGIUM\KUL\ZAPPA\04 Simulations\01 ANSYS\07 Optimization\02_parametrisation1\01_input_files\main.lgw" -o "C:\Users\u0137935\Dropbox\_BELGIUM\KUL\ZAPPA\04 Simulations\01 ANSYS\07 Optimization\02_parametrisation1\02_exports\ansys_prompt.txt" &
