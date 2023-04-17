@@ -60,13 +60,15 @@ else
     seeds = 1:nRuns;  % get the seeds
 end
 
-for ii = 1:length(nRuns)
+for ii = 1:nRuns
 
-    disp(['Running with rng(' num2str(seeds(ii)) ')... [run ' num2str(ii) '/' num2str(length(seeds)) ']'])
     
     if strcmp(testType, 'changing_seed')
         % Set seed
         rng(seeds(ii))
+        disp(['Running with rng(' num2str(seeds(ii)) ')... [run ' num2str(ii) '/' num2str(length(seeds)) ']'])
+    else
+        disp(['Running with rng(default)... [run ' num2str(ii) '/' num2str(nRuns) ']'])
     end
 
     % Compute the modal force (force in spatial domain, uncorrelated sources)

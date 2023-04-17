@@ -1,6 +1,6 @@
 /BATCH  
-/COM,ANSYS RELEASE Release 19.2      BUILD 19.2      UP20180808       14:21:35
-/COM,ANSYS RELEASE Release 19.2      BUILD 19.2      UP20180808       14:21:35
+/COM,ANSYS RELEASE Release 19.2      BUILD 19.2      UP20180808       14:44:56
+/COM,ANSYS RELEASE Release 19.2      BUILD 19.2      UP20180808       14:44:56
 ! --- Frequency resolution and mesh sizes   
 C***,Frequency resolution and mesh sizes
 *USE,GET_MESH_SIZE,Speed_Sound,Freq_high_MA,flowres,mySMSfact   
@@ -105,3 +105,68 @@ OUTRES,ALL,NONE  ! Write NOTHING to the database ...
 OUTRES,NSOL,ALL    ! ... else than the nodal solutions. 
 SAVE
 SOLVE    ! Calculate the modal response 
+FINISH  
+C***,UNFOLDHERE 
+! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
+! Post-processing and export
+C***,FOLDHERE   
+/post1  
+! Control amount of data to be fetched from database
+INRES,NSOL  
+! Get final number of sets (number of eigenfrequencies in range)
+*GET,neig,ACTIVE,0,SET,NSET 
+*SET,Fname , STRCAT(prefix_out,'paramsMA')  
+*CFOPEN,Fname,txt   ! Define output file name   
+*VWRITE,V,SurfArea,Mesh_size,Speed_Sound,Density  ! Write physical parameters   
+(F,6x,F,6x,F,6x,F,6x,F) 
+*VWRITE,Csx,Csy,Lsx,Lsy,ds   ! Write sample parameters  
+(F,6x,F,6x,F,6x,F,6x,F) 
+*DO,ii,1,Ns 
+*SET,s1 , s_pos(ii:ii,1:1)  
+*SET,s2 , s_pos(ii:ii,2:2)  
+*SET,s3 , s_pos(ii:ii,3:3)  
+*VWRITE,s1,s2,s3 ! Write true source positions  
+(F,6x,F,6x,F)   
+*ENDDO  
+*CFCLOS 
+! Initiate results arrays   
+*DEL,freqs  
+*DEL,ps 
+*DIM,freqs,ARRAY,neig    ! Analysis frequency (real/imag part)  
+*DO,ii,1,Ns 
+*DEL,ps_%CHRVAL(ii)%
+*DIM,ps_%CHRVAL(ii)%,ARRAY,neig  ! Pressures at sources (real/imag part)
+*ENDDO  
+! Loop on each solved step (each analysis frequency)
+*DO,ii,1,neig   
+*IF,ii,EQ,1,then  ! Open the solution (sub)step 
+SET,FIRST   
+*ELSE   
+SET,NEXT
+*ENDIF  
+! Get the data  
+*GET,freqs(ii:ii),ACTIVE,0,SET,FREQ      ! Get the eigenfrequency   
+*DO,jj,1,Ns 
+*GET,ps_%CHRVAL(jj)%(ii:ii),NODE,Mic_Node%CHRVAL(jj)%,PRES  
+*ENDDO  
+*ENDDO  
+*SET,Fname , STRCAT(prefix_out,'freqsMA')   
+*MWRITE,freqs,Fname,txt,,IJK,neig   
+(F) 
+*DO,ii,1,Ns 
+*SET,Fname , STRCAT(prefix_out,STRCAT('psMA_',CHRVAL(ii)))  
+*MWRITE,ps_%CHRVAL(ii)%,Fname,txt,,IJK,neig 
+(F) 
+*ENDDO  
+FINISH  
+! Export mode shapes on sample surface  
+*ULIB,RTanav3_macpath,mac   ! Use macro library 
+/PMACRO 
+*USE,EXPORT_MS_SAMPLE,prefix_out,neig,nNodExportMax 
+*ULIB   
+! Generate end of run flag file 
+*CFOPEN,STRCAT(prefix_out,'endofrun_flag'),txt  
+*VWRITE,'FLAGFLAGFLAG'  
+(A) 
+*CFCLOS 
+C***,UNFOLDHERE 

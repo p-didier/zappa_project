@@ -1,5 +1,5 @@
 clear; close all; clc;
-addpath('..\..\..')
+addpath('..\..')
 addpath(genpath('..\..\..\..\..\02 MATLAB\basefunctions'))
 addpath(genpath('..\..\..\..\toolbox'))
 addpath(genpath('..\..\..\..\..\02 MATLAB\09 Reverberation Time sims\10 RTana_v3\toolbox'))
