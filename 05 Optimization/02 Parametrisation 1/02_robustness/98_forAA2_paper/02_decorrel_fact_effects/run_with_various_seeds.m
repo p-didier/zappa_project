@@ -1,4 +1,4 @@
-function status = run_with_various_seeds(dd, seeds)
+function status = run_with_various_seeds(dd, nRuns, testType)
 % run_with_various_seeds -- Runs a full ANSYS analysis, then post-processes
 % its results using different random number generator seeds, to
 % investigate the impact of the randomly generated source decorrelation
@@ -6,7 +6,8 @@ function status = run_with_various_seeds(dd, seeds)
 %
 % >>> Inputs:
 % -dd [struct] - Design data read and arranged via <readdesigndata()>.
-% -seeds [list] - Seeds to consider.
+% -nRuns [int] - Number of (Monte-Carlo) runs.
+% -testType [str] - 'changing_seed' or 'changing_state'
 % >>> Outputs:
 % -Ø
 
@@ -56,7 +57,8 @@ end
 %%% Step 3 - Read data
 FEdata = read_FE_data(outpath,@readdata,0);
 %%% Step 4 - Post-process to derive ACs
-results = compute_alpha_various_seeds(FEdata,dd.workspace.ManualParams,seeds);
+results = compute_alpha_various_seeds(...
+    FEdata,dd.workspace.ManualParams,nRuns,testType);
 
 status = struct('alphab',results.alphab_all,'alpharef',results.alpharef_all,...
     'fc',results.fc,'fref',results.fref,'RCparam',sampleXYdims);

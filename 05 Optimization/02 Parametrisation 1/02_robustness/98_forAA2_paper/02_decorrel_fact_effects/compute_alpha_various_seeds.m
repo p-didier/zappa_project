@@ -1,4 +1,4 @@
-function results = compute_alpha_various_seeds(FEdata, mp, seeds)
+function results = compute_alpha_various_seeds(FEdata, mp, nRuns, testType)
 % compute_alpha_various_seeds -- Compute absorption coefficient given Ansys
 % outputs. Using the FE-RR way to estimate ACs. Computing the modal force
 % vector using various seeds for the multi-source decorrelation factor.
@@ -6,7 +6,8 @@ function results = compute_alpha_various_seeds(FEdata, mp, seeds)
 % >>> Inputs:
 % -FEdata [struct] - Simulation output organised in a structure.
 % -mp [struct] - Manually-input parameters.
-% -seeds [list] - Seeds to consider.
+% -nRuns [int] - Number of (Monte-Carlo) runs.
+% -testType [str] - 'changing_seed' or 'changing_state'
 % >>> Outputs:
 % -SNV [float, -] - Single-Number-Value associated to input parameters.
 % -plotdata [struct] - Data useful for subsequent dynamic plotting.
@@ -53,12 +54,20 @@ eta = getEtaFromTempty(Tempty,freq);
 Zs = Z_Miki(rho,c,freq,Xi,ds_eff,0); 
 beta = rho*c./Zs;
 
-for ii = 1:length(seeds)
+if strcmp(testType, 'changing_state')
+    rng('default')
+else
+    seeds = 1:nRuns;  % get the seeds
+end
+
+for ii = 1:length(nRuns)
 
     disp(['Running with rng(' num2str(seeds(ii)) ')... [run ' num2str(ii) '/' num2str(length(seeds)) ']'])
     
-    % Set seed
-    rng(seeds(ii))
+    if strcmp(testType, 'changing_seed')
+        % Set seed
+        rng(seeds(ii))
+    end
 
     % Compute the modal force (force in spatial domain, uncorrelated sources)
     fvec = getModalForce(FEdata.ps(idxeig:end,:),freq,true);   

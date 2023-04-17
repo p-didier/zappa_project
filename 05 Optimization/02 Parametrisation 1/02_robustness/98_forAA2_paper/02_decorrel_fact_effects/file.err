@@ -1,0 +1,19 @@
+/COM,ANSYS RELEASE Release 19.2      BUILD 19.2      UP20180808       14:21:34
+
+ *** WARNING ***                         CP =       0.281   TIME= 14:21:35
+ Assembly SAMPLEVOLUME is deleted.                                       
+
+ *** WARNING ***                         CP =       0.281   TIME= 14:21:35
+ Specified range of 0 to 0 is not permitted.  The VSEL command is        
+ ignored.                                                                
+
+ *** WARNING ***                         CP =       0.703   TIME= 14:21:36
+ Unknown parameter name= REFINEMESHARSAMPLE.  A value of 7.888609052E-31 
+ will be used.                                                           
+
+ *** WARNING ***                         CP =       1.031   TIME= 14:21:36
+ CLEAR, SELECT, and MESH boundary condition commands are not possible    
+ after MODMSH.                                                           
+
+ *** WARNING ***                         CP =       1.391   TIME= 14:21:36
+ No constraints have been defined using the D command.                   
