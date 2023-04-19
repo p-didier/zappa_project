@@ -14,7 +14,7 @@ addpath(genpath('..\..\..\..\..\02 MATLAB\09 Reverberation Time sims\10 RTana_v3
 
 testType = 'changing_seed';  % repeating the same simulation with a 
     % different rng(seed) call at every run.
-testType = 'changing_state'; % repeating the same simulation with 
+% testType = 'changing_state'; % repeating the same simulation with 
     % the same rng(seed) (outside of the for-loop), but rand() is
     % called at every run --> the rng state changes.
     
@@ -22,13 +22,13 @@ outputFolder = './out';
 
 % Data location and referencing
 prePath = '..\..\..\..\..\01 ANSYS\07 Optimization\02_parametrisation1\02_exports\backups';
-runRef_all = {'kwwcwpj','snqcogt','iillxzc','tyickyz','drmmvgu'};
-runRef_all = {'snqcogt','iillxzc','tyickyz','drmmvgu'};
-runRef_all = {'kwwcwpj','rxztxfn'};
-runRef_all = {'kwwcwpj'};
+runRef_all = {'kwwcwpj','snqcogt','iillxzc','tyickyz','drmmvgu','rxztxfn'};
+% runRef_all = {'snqcogt','iillxzc','tyickyz','drmmvgu'};
+% runRef_all = {'kwwcwpj','rxztxfn'};
+% runRef_all = {'kwwcwpj'};
 
 % RNG seeds
-nRuns = 3;
+nRuns = 50;
 
 % Forced physical parameters (to not force, use NaN)
 ds = 0.2;       % Sample thickness

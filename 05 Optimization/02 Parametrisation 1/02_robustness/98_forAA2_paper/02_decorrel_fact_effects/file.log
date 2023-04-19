@@ -1,6 +1,6 @@
 /BATCH  
-/COM,ANSYS RELEASE Release 19.2      BUILD 19.2      UP20180808       14:44:56
-/COM,ANSYS RELEASE Release 19.2      BUILD 19.2      UP20180808       14:44:56
+/COM,ANSYS RELEASE Release 19.2      BUILD 19.2      UP20180808       01:50:56
+/COM,ANSYS RELEASE Release 19.2      BUILD 19.2      UP20180808       01:50:56
 ! --- Frequency resolution and mesh sizes   
 C***,Frequency resolution and mesh sizes
 *USE,GET_MESH_SIZE,Speed_Sound,Freq_high_MA,flowres,mySMSfact   

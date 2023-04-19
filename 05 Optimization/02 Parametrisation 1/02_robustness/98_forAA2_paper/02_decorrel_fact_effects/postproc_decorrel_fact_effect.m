@@ -8,9 +8,15 @@ clear; close all; clc;
 
 %% INIT
 
+testType = 'changing_seed';  % repeating the same simulation with a 
+    % different rng(seed) call at every run.
+testType = 'changing_state'; % repeating the same simulation with 
+    % the same rng(seed) (outside of the for-loop), but rand() is
+    % called at every run --> the rng state changes.
+
 runRefs = {'kwwcwpj','snqcogt','iillxzc','tyickyz','drmmvgu','rxztxfn'};
 % runRefs = {'snqcogt','iillxzc','tyickyz','drmmvgu'};
-matFilenamePrefix = 'seedstest_';
+matFilenamePrefix = ['./out/' testType '_'];
 nSeedsToConsider = 50;
 
 %% PROCESS
@@ -33,19 +39,23 @@ for ii = 1:length(runRefs)
         std(status.alphab(:, 1:nSeedsToConsider), [], 2), 'bo-', "linewidth", 1.5);
     l3 = plot(f, status.alpharef(:, 1), 'xk-', "linewidth", 1.5);
     if ii == length(runRefs)
-        legend([l1(1), l2, l3], {'$\alpha_\mathrm{sim}$ for individual \texttt{rng} seeds',...
-            'Mean and standard dev. of $\alpha_\mathrm{sim}$ across \texttt{rng} seeds',...
+        legend([l1(1), l2, l3], {'$\alpha_\mathrm{sim}$ for individual runs',...
+            'Mean and standard dev. of $\alpha_\mathrm{sim}$ across runs',...
             '$\alpha_\mathrm{diff}$ (reference)'},...
             'Location','southeast')
     end
     OTOBticks
     ylabel '$\alpha$'
     ylim([0.9, 1.3])
-    title(['RR\#' num2str(ii) ' - ref. "' runRefs{ii} '"'])
+    title(['RR\#' num2str(ii)])
 end
-% suptitle(['Number of \texttt{rng} seeds considered: ' ...
-%     num2str(nSeedsToConsider)])
+if strcmp(testType, 'changing_seed')
+    testTypeStr = 'Changing rng(seed)';
+elseif strcmp(testType, 'changing_state')
+    testTypeStr = 'Changing state, with rng(0)';
+end
+suptitle([testTypeStr ' -- ' num2str(nSeedsToConsider) ' runs'])
 
-if 1
-    exportfigure(fig, 'rngTest', '00_fig/04_debugging')
+if 0
+    exportfigure(fig, testType, 'fig')
 end
